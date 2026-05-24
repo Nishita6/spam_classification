@@ -74,7 +74,3 @@ pip install pandas scikit-learn nltk streamlit
 ``` text
 streamlit run app.py
 ```
-<<<<<<< HEAD
-=======
-
->>>>>>> 437576561b169958cd8a4c39acdb6214a5c6c763
