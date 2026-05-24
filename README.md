@@ -4,6 +4,9 @@ An end-to-end Machine Learning web application that classifies emails or SMS mes
 
 📂 **Repository:** [Nishita6/spam_classification](https://github.com/Nishita6/spam_classification)
 
+🔗 **Live Application:** https://spamclassification6.streamlit.app/
+
+
 ---
 
 ## 🚀 Features
