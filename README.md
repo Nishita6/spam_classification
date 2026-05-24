@@ -2,7 +2,6 @@
 
 An end-to-end Machine Learning web application that classifies emails or SMS messages into **Spam** or **Ham (Legitimate)** with high accuracy. This project covers the entire data science pipeline—from raw text preprocessing and Exploratory Data Analysis (EDA) to model training, evaluation, and deployment.
 
-🔗 **Live Application:** [spam-classification.vercel.app](https://spam-classification.vercel.app)  
 📂 **Repository:** [Nishita6/spam_classification](https://github.com/Nishita6/spam_classification)
 
 ---
@@ -72,4 +71,3 @@ pip install pandas scikit-learn nltk streamlit
 ``` text
 streamlit run app.py
 ```
-
