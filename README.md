@@ -73,12 +73,6 @@ pip install -r requirements.txt
 streamlit run app.py
 ```
 
-**View MLflow experiment dashboard:**
-```bash
-mlflow ui
-# open http://localhost:5000
-```
-
 ---
 
 ## 💡 Key Design Decisions
