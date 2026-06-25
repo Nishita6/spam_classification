@@ -1,6 +1,6 @@
 # 📧 Email / SMS Spam Classifier
 
-An end-to-end Machine Learning web application that classifies emails or SMS messages into **Spam** or **Ham (Legitimate)** — with explainable predictions, confidence scoring, user feedback collection, and full experiment tracking across 11 models.
+An end-to-end Machine Learning web application that classifies emails or SMS messages into **Spam** or **Ham (Legitimate)** - with explainable predictions, confidence scoring, user feedback collection, and full experiment tracking across 11 models.
 
 📂 **Repository:** [Nishita6/spam_classification](https://github.com/Nishita6/spam_classification)
 🔗 **Live Application:** https://spamclassification6.streamlit.app/
@@ -9,12 +9,12 @@ An end-to-end Machine Learning web application that classifies emails or SMS mes
 
 ## 🚀 Features
 
-- **Real-time Classification** — instantly classify any email or SMS as Spam or Ham
-- **Confidence Score + Threshold Control** — see the model's probability score and adjust the spam threshold via a slider (not just a binary yes/no)
-- **Explainable AI with LIME** — understand *why* a message was flagged; top 10 words that influenced the prediction shown as a bar chart with the original message highlighted word-by-word
-- **User Feedback Loop** — users can flag wrong predictions; every correction is saved to `feedback.csv` with timestamp, confidence, and correct label
-- **Feedback Dashboard** — sidebar shows real-time model accuracy based on user corrections, cumulative accuracy trend, and downloadable feedback CSV
-- **Robust NLP Preprocessing** — lowercasing, tokenization, stop-word removal, and Porter stemming via NLTK
+- **Real-time Classification** - instantly classify any email or SMS as Spam or Ham
+- **Confidence Score + Threshold Control** - see the model's probability score and adjust the spam threshold via a slider (not just a binary yes/no)
+- **Explainable AI with LIME** - understand *why* a message was flagged; top 10 words that influenced the prediction shown as a bar chart with the original message highlighted word-by-word
+- **User Feedback Loop** - users can flag wrong predictions; every correction is saved to `feedback.csv` with timestamp, confidence, and correct label
+- **Feedback Dashboard** - sidebar shows real-time model accuracy based on user corrections, cumulative accuracy trend, and downloadable feedback CSV
+- **Robust NLP Preprocessing** - lowercasing, tokenization, stop-word removal, and Porter stemming via NLTK
 
 ---
 
@@ -33,7 +33,7 @@ An end-to-end Machine Learning web application that classifies emails or SMS mes
 
 ## 🔍 How Explainability Works
 
-LIME (Local Interpretable Model-agnostic Explanations) works by creating hundreds of perturbed versions of the input message — randomly masking words — and observing how the model's prediction changes. Words whose removal causes a large drop in spam probability are flagged as strong spam signals.
+LIME (Local Interpretable Model-agnostic Explanations) works by creating hundreds of perturbed versions of the input message - randomly masking words - and observing how the model's prediction changes. Words whose removal causes a large drop in spam probability are flagged as strong spam signals.
 
 This surfaces insights like:
 - `free`, `win`, `prize`, `claim`, `urgent` → strong spam indicators 🔴
