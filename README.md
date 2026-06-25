@@ -1,77 +1,87 @@
-# Email Spam Classifier 📧🚫
+# 📧 Email / SMS Spam Classifier
 
-An end-to-end Machine Learning web application that classifies emails or SMS messages into **Spam** or **Ham (Legitimate)** with high accuracy. This project covers the entire data science pipeline—from raw text preprocessing and Exploratory Data Analysis (EDA) to model training, evaluation, and deployment.
+An end-to-end Machine Learning web application that classifies emails or SMS messages into **Spam** or **Ham (Legitimate)** - with explainable predictions, confidence scoring, user feedback collection, and full experiment tracking across 11 models.
 
 📂 **Repository:** [Nishita6/spam_classification](https://github.com/Nishita6/spam_classification)
+🔗 **Live Application:** https://spamclassification6.streamlit.app/
 
 ---
 
 ## 🚀 Features
-* **Real-time Classification:** Input any text block or email body to instantly check if it's spam.
-* **Interactive UI:** A clean, user-friendly frontend interface built for seamless interaction.
-* **Robust Preprocessing:** Handles text cleaning, tokenization, stop-word removal, and stemming to optimize feature extraction.
-* **Data Insights:** Comprehensive Exploratory Data Analysis (EDA) visualizing word frequencies, character counts, and class distributions.
+
+- **Real-time Classification** - instantly classify any email or SMS as Spam or Ham
+- **Confidence Score + Threshold Control** - see the model's probability score and adjust the spam threshold via a slider (not just a binary yes/no)
+- **Explainable AI with LIME** - understand *why* a message was flagged; top 10 words that influenced the prediction shown as a bar chart with the original message highlighted word-by-word
+- **User Feedback Loop** - users can flag wrong predictions; every correction is saved to `feedback.csv` with timestamp, confidence, and correct label
+- **Feedback Dashboard** - sidebar shows real-time model accuracy based on user corrections, cumulative accuracy trend, and downloadable feedback CSV
+- **Robust NLP Preprocessing** - lowercasing, tokenization, stop-word removal, and Porter stemming via NLTK
 
 ---
 
-## 🛠️ Tech Stack & Tools
-* **Language:** Python 🐍
-* **Data Analysis & ML:** Jupyter Notebook, Pandas, NumPy, Scikit-Learn
-* **Natural Language Processing (NLP):** NLTK (Natural Language Toolkit)
-* **Model Deployment:** Streamlit / Flask (Backend), Vercel (Hosting)
-* **Version Control:** Git & GitHub
+## 🛠️ Tech Stack
+
+| Area | Tools |
+|---|---|
+| Language | Python 3 |
+| ML & Data | Scikit-learn, Pandas, NumPy, XGBoost |
+| NLP | NLTK (tokenization, stopwords, stemming) |
+| Explainability | LIME (Local Interpretable Model-agnostic Explanations) |
+| Frontend & Deployment | Streamlit, Streamlit Cloud |
+| Version Control | Git & GitHub |
 
 ---
 
-## 📊 Methodology & Workflow
+## 🔍 How Explainability Works
 
-### 1. Data Cleaning & Preprocessing
-* Removed duplicate entries and handled missing values.
-* Converted text to lowercase and tokenized sentences into individual words.
-* Stripped special characters, punctuation, and English stop words.
-* Applied **Stemming** (PorterStemmer) to reduce words to their base forms.
+LIME (Local Interpretable Model-agnostic Explanations) works by creating hundreds of perturbed versions of the input message - randomly masking words - and observing how the model's prediction changes. Words whose removal causes a large drop in spam probability are flagged as strong spam signals.
 
-### 2. Exploratory Data Analysis (EDA)
-* Analyzed the distribution of Spam vs. Ham classes to inspect dataset balance.
-* Computed statistics on the number of characters, words, and sentences per message.
-* Built word clouds and frequency histograms to identify the most common terms in both categories.
-
-### 3. Vectorization & Feature Engineering
-* Converted processed text data into numerical vectors using **TF-IDF (Term Frequency-Inverse Document Frequency)** vectorization to capture contextual importance.
-
-### 4. Model Training & Selection
-* Trained and evaluated multiple classification algorithms (e.g., Naive Bayes, Logistic Regression, Support Vector Machines).
-* Tuned hyperparameters to optimize precision and recall, prioritizing low false-positive rates (ensuring important emails aren't accidentally marked as spam).
+This surfaces insights like:
+- `free`, `win`, `prize`, `claim`, `urgent` → strong spam indicators 🔴
+- `lunch`, `meeting`, `home`, `tomorrow` → strong ham indicators 🟢
 
 ---
 
 ## 📁 Repository Structure
-```text
-├── .idea/                          # IDE configuration files
-├── Spam_Classifier_project.ipynb   # Jupyter Notebook containing EDA, preprocessing, and model training
-├── app.py                          # Application source code for deployment
-├── model.pkl                       # Trained machine learning model artifact
-├── vectorizer.pkl                  # Fitted TF-IDF vectorizer artifact
-└── README.md                       # Project documentation
+
+```
+├── Spam_Classifier_project.ipynb   # EDA, preprocessing, model training, MLflow tracking
+├── app.py                          # Streamlit app with LIME explainability + feedback loop
+├── model.pkl                       # Trained Naive Bayes model
+├── vectorizer.pkl                  # Fitted TF-IDF vectorizer
+├── feedback.csv                    # User feedback collected at runtime (auto-generated)
+├── requirements.txt                # Dependencies
+└── README.md
 ```
 
 ---
 
 ## ⚙️ How to Run Locally
-* Clone the repository:
- ```text
+
+**Clone the repo:**
+```bash
 git clone https://github.com/Nishita6/spam_classification.git
 cd spam_classification
 ```
-* Install dependencies
-``` text
-pip install pandas scikit-learn nltk streamlit
+
+**Install dependencies:**
+```bash
+pip install -r requirements.txt
 ```
-* Run the application:
-``` text
+
+**Run the app:**
+```bash
 streamlit run app.py
 ```
-<<<<<<< HEAD
-=======
 
->>>>>>> 437576561b169958cd8a4c39acdb6214a5c6c763
+---
+
+## 💡 Key Design Decisions
+
+**Why Naive Bayes over KNN (both have precision=1.0)?**
+KNN achieves perfect precision but only 90.8% accuracy — it misses too many actual spam messages. Naive Bayes hits 97.7% accuracy with the same precision, making it the better overall choice.
+
+**Why precision over accuracy as the selection metric?**
+A false positive (flagging a legitimate email as spam) is more damaging than a false negative (letting spam through). Precision directly measures this: of all messages flagged as spam, what fraction actually are?
+
+**Why LIME over SHAP?**
+LIME works directly on raw text without needing access to model internals, making it model-agnostic and compatible with the TF-IDF + Naive Bayes pipeline without any modifications.
